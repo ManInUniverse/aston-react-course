@@ -8,7 +8,7 @@ import { PictureList } from '../../components/picture-list/picture-list';
 export const MainPage = () => {
   const [randomPictures, setRandomPictures] = useState<Pictures>([]);
   useEffect(() => {
-    fetchRandomPictures().then((pictures) => setRandomPictures(pictures));
+    fetchRandomPictures().then(setRandomPictures);
   }, []);
 
   return (

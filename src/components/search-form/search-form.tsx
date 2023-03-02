@@ -4,8 +4,8 @@ import { ChangeEvent } from 'react';
 export const SearchForm = () => {
   const [inputValue, setInputValue] = useState('');
 
-  const onInputChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(evt.target.value);
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
   };
 
   return (

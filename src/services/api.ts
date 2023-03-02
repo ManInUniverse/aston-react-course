@@ -38,7 +38,7 @@ export const fetchRandomPictures = async () => {
   const PICTURES_COUNT = 12;
   const response = await fetch(`${BASE_URL}/photos/random?count=${PICTURES_COUNT}`, FETCH_OPTIONS);
   const data = (await response.json()) as PictureDTO[];
-  const pictures = data.map((dto) => getPictureFromDto(dto));
+  const pictures = data.map(getPictureFromDto);
 
   return pictures;
 };
