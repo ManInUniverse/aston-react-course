@@ -13,3 +13,7 @@ export enum AuthStatus {
   NonAuth = 'NON_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum NameSpace {
+  User = 'USER',
+}

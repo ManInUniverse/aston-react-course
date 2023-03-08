@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AppRoute, AuthStatus } from '../../const';
+import { AppRoute } from '../../const';
 
 import { Layout } from '../layout/layout';
 import { PrivateRoute } from '../private-route/private-route';
@@ -24,7 +24,7 @@ export const App = () => {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authStatus={AuthStatus.Auth}>
+              <PrivateRoute>
                 <FavoritesPage />
               </PrivateRoute>
             }
@@ -33,7 +33,7 @@ export const App = () => {
           <Route
             path={AppRoute.History}
             element={
-              <PrivateRoute authStatus={AuthStatus.Auth}>
+              <PrivateRoute>
                 <HistoryPage />
               </PrivateRoute>
             }
