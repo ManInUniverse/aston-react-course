@@ -19,11 +19,15 @@ export const Header = () => {
           <img className="h-[50px]" src={logo} alt="Pictorial" />
         </Link>
 
-        <div className="mr-6 xl:w-[350px]">
+        <div className="mr-auto xl:w-[350px]">
           <SearchForm />
         </div>
 
-        <div className="ml-auto">{isAuthChecked && <UserNav />}</div>
+        {isAuthChecked && (
+          <div className="ml-6">
+            <UserNav />
+          </div>
+        )}
       </div>
     </header>
   );

@@ -5,14 +5,11 @@ import { Link } from 'react-router-dom';
 import { SignUpData } from '../../types/user';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { getErrorMessage } from '../../store/slices/user-slice/selectors';
 import { signUpAction } from '../../store/user-api-actions';
 
 export const SignUpForm = () => {
   const dispatch = useAppDispatch();
-  const errorMessage = useAppSelector(getErrorMessage);
-  const [shouldDisplayError, setShouldDisplayError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState<SignUpData>({
     name: '',
     email: '',
@@ -29,13 +26,14 @@ export const SignUpForm = () => {
 
   const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(signUpAction(formData));
-    setShouldDisplayError(true);
+    dispatch(signUpAction(formData))
+      .unwrap()
+      .catch((error) => setErrorMessage(error.message));
   };
 
   return (
     <form onSubmit={onFormSubmit} className="space-y-4">
-      {shouldDisplayError && <p className="text-red-600 text-center">{errorMessage}</p>}
+      {errorMessage && <p className="text-red-600 text-center">{errorMessage}</p>}
 
       <div>
         <input

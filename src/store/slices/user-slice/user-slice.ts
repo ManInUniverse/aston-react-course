@@ -6,13 +6,11 @@ import { signUpAction, signInAction, signOutAction, checkAuthAction } from '../.
 type UserSlice = {
   authStatus: AuthStatus;
   userData: UserData | null;
-  errorMessage: string | null;
 };
 
 const initialState: UserSlice = {
   authStatus: AuthStatus.Unknown,
   userData: null,
-  errorMessage: null,
 };
 
 const userSlice = createSlice({
@@ -21,9 +19,6 @@ const userSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(checkAuthAction.pending, (state) => {
-        state.errorMessage = null;
-      })
       .addCase(
         checkAuthAction.fulfilled,
         (state, { payload: { name, email, favorites, history } }) => {
@@ -31,17 +26,11 @@ const userSlice = createSlice({
           state.authStatus = AuthStatus.Auth;
         }
       )
-      .addCase(checkAuthAction.rejected, (state, { error }) => {
+      .addCase(checkAuthAction.rejected, (state) => {
         state.userData = null;
         state.authStatus = AuthStatus.NonAuth;
-        if (error.message) {
-          state.errorMessage = error.message;
-        }
       })
-      // -------------------------------------------------------------------------------------------------------------------
-      .addCase(signUpAction.pending, (state) => {
-        state.errorMessage = null;
-      })
+      // -------------------------------------------------------------------------
       .addCase(
         signUpAction.fulfilled,
         (state, { payload: { name, email, favorites, history } }) => {
@@ -49,17 +38,11 @@ const userSlice = createSlice({
           state.authStatus = AuthStatus.Auth;
         }
       )
-      .addCase(signUpAction.rejected, (state, { error }) => {
+      .addCase(signUpAction.rejected, (state) => {
         state.userData = null;
         state.authStatus = AuthStatus.NonAuth;
-        if (error.message) {
-          state.errorMessage = error.message;
-        }
       })
-      // -------------------------------------------------------------------------------------------------------------------
-      .addCase(signInAction.pending, (state) => {
-        state.errorMessage = null;
-      })
+      // -------------------------------------------------------------------------
       .addCase(
         signInAction.fulfilled,
         (state, { payload: { name, email, favorites, history } }) => {
@@ -67,25 +50,14 @@ const userSlice = createSlice({
           state.authStatus = AuthStatus.Auth;
         }
       )
-      .addCase(signInAction.rejected, (state, { error }) => {
+      .addCase(signInAction.rejected, (state) => {
         state.userData = null;
         state.authStatus = AuthStatus.NonAuth;
-        if (error.message) {
-          state.errorMessage = error.message;
-        }
       })
-      // -------------------------------------------------------------------------------------------------------------------
-      .addCase(signOutAction.pending, (state) => {
-        state.errorMessage = null;
-      })
+      // -------------------------------------------------------------------------
       .addCase(signOutAction.fulfilled, (state) => {
         state.userData = null;
         state.authStatus = AuthStatus.NonAuth;
-      })
-      .addCase(signOutAction.rejected, (state, { error }) => {
-        if (error.message) {
-          state.errorMessage = error.message;
-        }
       });
   },
 });
