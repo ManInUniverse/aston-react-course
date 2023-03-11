@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { SignInData, SignUpData, User } from '../types/user';
+import { AddToFavoritesData, SignInData, SignUpData, User } from '../types/user';
 import { AppDispatch, RootState } from '../store/index';
 import { UserAPI } from '../services/user-api';
 
@@ -35,5 +35,12 @@ export const checkAuthAction = createAsyncThunk<User, undefined, AppThunkApiConf
   'user/checkAuth',
   async (_arg, { extra: userAPI }) => {
     return await userAPI.checkAuth();
+  }
+);
+
+export const addToFavoritesAction = createAsyncThunk<User, AddToFavoritesData, AppThunkApiConfig>(
+  'user/addToFavorites',
+  async (addToFavoritesData, { extra: userAPI }) => {
+    return await userAPI.addToFavorites(addToFavoritesData);
   }
 );
