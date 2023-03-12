@@ -19,7 +19,7 @@ export const PictureCard = ({ picture }: Props) => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector(getUserData);
 
-  const isFavorite = userData ? userData.favorites.some((id) => id === picture.id) : false;
+  const isFavorite = userData?.favorites.some((id) => id === picture.id);
 
   const onFavoriteButtonClick = () => {
     if (userData) {
@@ -54,7 +54,7 @@ export const PictureCard = ({ picture }: Props) => {
           isFavorite ? 'block' : 'hidden'
         } absolute bottom-0 right-0 z-[2] m-4 group-hover:block`}
       >
-        <FavoriteButton isActive={isFavorite} onButtonClick={onFavoriteButtonClick} />
+        <FavoriteButton isActive={!!isFavorite} onButtonClick={onFavoriteButtonClick} />
       </div>
     </div>
   );
