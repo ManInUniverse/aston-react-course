@@ -1,7 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { AuthStatus, NameSpace } from '../../../const';
 import { UserData } from '../../../types/user';
-import { signUpAction, signInAction, signOutAction, checkAuthAction } from '../../user-api-actions';
+import {
+  signUpAction,
+  signInAction,
+  signOutAction,
+  checkAuthAction,
+  addToFavoritesAction,
+} from '../../user-api-actions';
 
 type UserSlice = {
   authStatus: AuthStatus;
@@ -58,7 +64,14 @@ const userSlice = createSlice({
       .addCase(signOutAction.fulfilled, (state) => {
         state.userData = null;
         state.authStatus = AuthStatus.NonAuth;
-      });
+      })
+      // -------------------------------------------------------------------------
+      .addCase(
+        addToFavoritesAction.fulfilled,
+        (state, { payload: { name, email, favorites, history } }) => {
+          state.userData = { name, email, favorites, history };
+        }
+      );
   },
 });
 

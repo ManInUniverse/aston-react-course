@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
 
-import { AppRoute } from '../../const';
+import { AppRoute, AuthStatus } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { getAuthCheckedStatus } from '../../store/slices/user-slice/selectors';
+import { getAuthCheckedStatus, getAuthStatus } from '../../store/slices/user-slice/selectors';
 
 import logo from '../../assets/logo.svg';
 
 import { UserNav } from '../user-nav/user-nav';
+import { GuestNav } from '../guest-nav/guest-nav';
 import { SearchForm } from '../search-form/search-form';
 
 export const Header = () => {
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const authStatus = useAppSelector(getAuthStatus);
 
   return (
     <header className="bg-[#01012A] shadow-md">
@@ -24,9 +26,7 @@ export const Header = () => {
         </div>
 
         {isAuthChecked && (
-          <div className="ml-6">
-            <UserNav />
-          </div>
+          <div className="ml-6">{authStatus === AuthStatus.Auth ? <UserNav /> : <GuestNav />}</div>
         )}
       </div>
     </header>

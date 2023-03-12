@@ -1,4 +1,4 @@
-import { User, Users, SignInData, SignUpData } from '../types/user';
+import { User, Users, SignInData, SignUpData, AddToFavoritesData } from '../types/user';
 
 const USERS = 'users';
 const DELAY = 1000;
@@ -72,6 +72,28 @@ export class UserAPI {
         }
 
         reject(new Error('User is not authorized!'));
+      }, DELAY);
+    });
+
+  addToFavorites = ({ email, id }: AddToFavoritesData): Promise<User> =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        const users = this.getUsers();
+        const targetUser = users.find((user) => user.email === email);
+
+        if (targetUser) {
+          const favorites = targetUser.favorites;
+          const itemIndex = favorites.indexOf(id);
+
+          if (itemIndex === -1) {
+            favorites.push(id);
+          } else {
+            favorites.splice(itemIndex, 1);
+          }
+          this.putUsers(users);
+
+          resolve(targetUser);
+        }
       }, DELAY);
     });
 
