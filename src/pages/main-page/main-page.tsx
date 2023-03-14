@@ -1,15 +1,13 @@
-import { useEffect, useState } from 'react';
-
-import { fetchRandomPictures } from '../../services/api';
-import { Pictures } from '../../types/picture';
+import { useGetRandomPicturesQuery } from '../../services/picture-api';
 
 import { PictureList } from '../../components/picture-list/picture-list';
 
 export const MainPage = () => {
-  const [randomPictures, setRandomPictures] = useState<Pictures>([]);
-  useEffect(() => {
-    fetchRandomPictures().then(setRandomPictures);
-  }, []);
+  const { isLoading, data: randomPictures } = useGetRandomPicturesQuery();
+
+  if (isLoading) {
+    return <p className="text-center text-4xl font-bold">Loading...</p>;
+  }
 
   return (
     <>
@@ -18,11 +16,7 @@ export const MainPage = () => {
       <section>
         <h2 className="sr-only">Random pictures</h2>
 
-        {randomPictures.length ? (
-          <PictureList pictures={randomPictures} />
-        ) : (
-          <p className="text-center text-4xl font-bold">Loading...</p>
-        )}
+        {randomPictures && <PictureList pictures={randomPictures} />}
       </section>
     </>
   );

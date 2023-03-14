@@ -35,7 +35,7 @@ export const PictureCard = ({ picture }: Props) => {
   };
 
   return (
-    <div className="border border-gray-200 rounded-lg shadow-md overflow-hidden relative group">
+    <div className="h-[300px] w-full border border-gray-200 rounded-lg shadow-md overflow-hidden relative group">
       <Link
         to={`/pictures/${picture.id}`}
         className="absolute top-0 left-0 z-[1] w-full h-full opacity-50 group-hover:bg-gradient-to-t group-hover:from-black"
@@ -44,7 +44,7 @@ export const PictureCard = ({ picture }: Props) => {
       </Link>
 
       <img
-        className="rounded-lg h-[300px] w-full object-cover transition duration-500 group-hover:scale-110"
+        className="rounded-lg h-full w-full object-cover transition duration-500 group-hover:scale-110"
         src={picture.urlSmall}
         alt={picture.description}
       />
