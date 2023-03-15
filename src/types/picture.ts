@@ -2,8 +2,6 @@ export type Picture = {
   id: string;
   description: string;
   locationName: string | null;
-  locationCity: string | null;
-  locationCountry: string | null;
   urlRegular: string;
   urlSmall: string;
   color: string;
@@ -17,11 +15,10 @@ export type Pictures = Picture[];
 
 export type PictureDTO = {
   id: string;
-  alt_description: string;
-  location: {
+  alt_description: string | null;
+  description: string | null;
+  location?: {
     name: string | null;
-    city: string | null;
-    country: string | null;
   };
   urls: {
     regular: string;
@@ -34,4 +31,10 @@ export type PictureDTO = {
     download: string;
   };
   created_at: string;
+};
+
+export type SearchResponse = {
+  total: number;
+  total_pages: number;
+  results: PictureDTO[];
 };

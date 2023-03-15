@@ -1,6 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { AddToFavoritesData, SignInData, SignUpData, User } from '../types/user';
+import {
+  AddToFavoritesData,
+  AddToHistoryData,
+  ClearHistoryData,
+  SignInData,
+  SignUpData,
+  User,
+} from '../types/user';
 import { AppDispatch, RootState } from '../store/index';
 import { UserAPI } from '../services/user-api';
 
@@ -42,5 +49,19 @@ export const addToFavoritesAction = createAsyncThunk<User, AddToFavoritesData, A
   'user/addToFavorites',
   async (addToFavoritesData, { extra: userAPI }) => {
     return await userAPI.addToFavorites(addToFavoritesData);
+  }
+);
+
+export const addToHistoryAction = createAsyncThunk<User, AddToHistoryData, AppThunkApiConfig>(
+  'user/addToHistory',
+  async (addToHistoryData, { extra: userAPI }) => {
+    return await userAPI.addToHistory(addToHistoryData);
+  }
+);
+
+export const clearHistoryAction = createAsyncThunk<User, ClearHistoryData, AppThunkApiConfig>(
+  'user/clearHistory',
+  async (clearHistoryData, { extra: userAPI }) => {
+    return await userAPI.clearHistory(clearHistoryData);
   }
 );

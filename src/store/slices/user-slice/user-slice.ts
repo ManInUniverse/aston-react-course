@@ -7,6 +7,8 @@ import {
   signOutAction,
   checkAuthAction,
   addToFavoritesAction,
+  addToHistoryAction,
+  clearHistoryAction,
 } from '../../user-api-actions';
 
 type UserSlice = {
@@ -68,6 +70,20 @@ const userSlice = createSlice({
       // -------------------------------------------------------------------------
       .addCase(
         addToFavoritesAction.fulfilled,
+        (state, { payload: { name, email, favorites, history } }) => {
+          state.userData = { name, email, favorites, history };
+        }
+      )
+      // -------------------------------------------------------------------------
+      .addCase(
+        addToHistoryAction.fulfilled,
+        (state, { payload: { name, email, favorites, history } }) => {
+          state.userData = { name, email, favorites, history };
+        }
+      )
+      // -------------------------------------------------------------------------
+      .addCase(
+        clearHistoryAction.fulfilled,
         (state, { payload: { name, email, favorites, history } }) => {
           state.userData = { name, email, favorites, history };
         }

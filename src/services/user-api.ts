@@ -1,4 +1,13 @@
-import { User, Users, SignInData, SignUpData, AddToFavoritesData } from '../types/user';
+import {
+  User,
+  Users,
+  SignInData,
+  SignUpData,
+  AddToFavoritesData,
+  AddToHistoryData,
+  HistoryItem,
+  ClearHistoryData,
+} from '../types/user';
 
 const USERS = 'users';
 const DELAY = 1000;
@@ -90,6 +99,42 @@ export class UserAPI {
           } else {
             favorites.splice(itemIndex, 1);
           }
+          this.putUsers(users);
+
+          resolve(targetUser);
+        }
+      }, DELAY);
+    });
+
+  addToHistory = ({ email, body }: AddToHistoryData): Promise<User> =>
+    new Promise((resolve) => {
+      const currentDateTime = new Date().toString();
+
+      setTimeout(() => {
+        const users = this.getUsers();
+        const targetUser = users.find((user) => user.email === email);
+
+        if (targetUser) {
+          const newHistoryItem: HistoryItem = {
+            date: currentDateTime,
+            body,
+          };
+          targetUser.history.push(newHistoryItem);
+          this.putUsers(users);
+
+          resolve(targetUser);
+        }
+      }, DELAY);
+    });
+
+  clearHistory = ({ email }: ClearHistoryData): Promise<User> =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        const users = this.getUsers();
+        const targetUser = users.find((user) => user.email === email);
+
+        if (targetUser) {
+          targetUser.history = [];
           this.putUsers(users);
 
           resolve(targetUser);

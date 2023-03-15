@@ -1,25 +1,25 @@
-import { ReactComponent as PlusIcon } from '../../assets/plus-icon.svg';
-import { ReactComponent as CheckMarkIcon } from '../../assets/check-mark-icon.svg';
+import { ReactComponent as FavoriteIcon } from '../../assets/favorite-icon.svg';
+import { ReactComponent as FavoriteFilledIcon } from '../../assets/favorite-filled-icon.svg';
 
 type Props = {
-  isActive: boolean;
+  active: boolean;
   onButtonClick: () => void;
 };
 
-export const FavoriteButton = ({ isActive, onButtonClick }: Props) => {
+export const FavoriteButton = ({ active, onButtonClick }: Props) => {
   return (
     <button
       onClick={onButtonClick}
-      className={`${isActive ? 'bg-green-500' : 'bg-neutral-200'} rounded-md p-2`}
-      title="Add to favorites"
+      className="bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 rounded-md shadow-sm p-2"
+      title={active ? 'Remove from favorites' : 'Add to favorites'}
     >
-      {isActive ? (
-        <CheckMarkIcon width="20" height="20" fill="white" />
+      {active ? (
+        <FavoriteFilledIcon width="27" height="27" fill="red" />
       ) : (
-        <PlusIcon width="20" height="20" fill="grey" />
+        <FavoriteIcon width="27" height="27" fill="grey" />
       )}
 
-      <span className="sr-only">Add to favorites</span>
+      <span className="sr-only">{active ? 'Remove from favorites' : 'Add to favorites'}</span>
     </button>
   );
 };

@@ -1,15 +1,17 @@
-import { useState } from 'react';
-import { ChangeEvent } from 'react';
+type Props = {
+  onFormSubmit: () => void;
+  onInputChange: (value: HTMLInputElement['value']) => void;
+  inputValue: HTMLInputElement['value'];
+};
 
-export const SearchForm = () => {
-  const [inputValue, setInputValue] = useState('');
-
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
+export const SearchForm = ({ onFormSubmit, onInputChange, inputValue }: Props) => {
   return (
-    <form className="flex items-center">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        onFormSubmit();
+      }}
+    >
       <label htmlFor="search" className="sr-only">
         Search
       </label>
@@ -32,11 +34,11 @@ export const SearchForm = () => {
         </div>
 
         <input
-          onChange={onInputChange}
+          onChange={(e) => onInputChange(e.target.value)}
           value={inputValue}
           type="text"
           id="search"
-          className="bg-gray-700 border border-gray-600 text-white text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2 placeholder-gray-400"
+          className="bg-gray-700 border border-gray-600 text-white text-lg rounded-lg block w-full pl-10 p-2 placeholder-gray-400"
           placeholder="Search pictures..."
           required
         />

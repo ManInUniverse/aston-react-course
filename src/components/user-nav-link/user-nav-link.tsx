@@ -9,11 +9,12 @@ const setActive = ({ isActive }: { isActive: boolean }) =>
 
 type Props = PropsWithChildren<{
   to: To;
+  title?: string;
 }>;
 
-export const UserNavLink = ({ to, children }: Props) => {
+export const UserNavLink = ({ to, children, title }: Props) => {
   return (
-    <NavLink to={to} className={setActive}>
+    <NavLink to={to} className={setActive} title={title}>
       {children}
     </NavLink>
   );

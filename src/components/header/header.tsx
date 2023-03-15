@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { getAuthCheckedStatus, getAuthStatus } from '../../store/slices/user-slice/selectors';
 
 import { Logo } from '../logo/logo';
-import { SearchForm } from '../search-form/search-form';
+import { Search } from '../search/search';
 import { GuestNav } from '../guest-nav/guest-nav';
 import { UserNav } from '../user-nav/user-nav';
 
@@ -19,7 +19,7 @@ export const Header = () => {
         </div>
 
         <div className="mr-auto xl:w-[350px]">
-          <SearchForm />
+          <Search />
         </div>
 
         {isAuthChecked && (

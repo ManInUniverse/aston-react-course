@@ -6,6 +6,7 @@ import { PrivateRoute } from '../private-route/private-route';
 
 import { MainPage } from '../../pages/main-page/main-page';
 import { PicturePage } from '../../pages/picture-page/picture-page';
+import { SearchResultsPage } from '../../pages/search-results-page/search-results-page';
 import { FavoritesPage } from '../../pages/favorites-page/favorites-page';
 import { HistoryPage } from '../../pages/history-page/history-page';
 import { SignInPage } from '../../pages/sign-in-page/sign-in-page';
@@ -20,6 +21,8 @@ export const App = () => {
           <Route index element={<MainPage />} />
 
           <Route path={AppRoute.Picture} element={<PicturePage />} />
+
+          <Route path={AppRoute.Search} element={<SearchResultsPage />} />
 
           <Route
             path={AppRoute.Favorites}

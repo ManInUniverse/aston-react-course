@@ -12,7 +12,7 @@ export const FavoriteItem = ({ id }: Props) => {
 
   return (
     <div className="h-[300px] w-full flex justify-center items-center">
-      {isLoading && <p className="text-center font-bold text-2xl">Loading...</p>}
+      {isLoading && <p className="text-center text-2xl">Loading...</p>}
 
       {favoritePicture && <PictureCard picture={favoritePicture} />}
     </div>

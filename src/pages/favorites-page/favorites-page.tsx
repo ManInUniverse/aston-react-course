@@ -8,8 +8,19 @@ export const FavoritesPage = () => {
 
   return (
     <section>
-      <h1 className="font-bold text-4xl text-center my-10">Favorites</h1>;
-      {userData && <FavoriteList favorites={userData.favorites} />}
+      <h1 className="sr-only">Favorites</h1>
+
+      {userData && (
+        <>
+          {userData.favorites.length ? (
+            <FavoriteList favorites={userData.favorites} />
+          ) : (
+            <p className="text-center text-3xl my-10">
+              It's empty here for now. You can add pictures you like to favorites and view them here
+            </p>
+          )}
+        </>
+      )}
     </section>
   );
 };
