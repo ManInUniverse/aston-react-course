@@ -15,7 +15,7 @@ export const SignInForm = () => {
     password: '',
   });
 
-  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const target = e.target;
     setFormData({
       ...formData,
@@ -23,7 +23,7 @@ export const SignInForm = () => {
     });
   };
 
-  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(signInAction(formData))
       .unwrap()
@@ -31,12 +31,12 @@ export const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={onFormSubmit} className="space-y-4">
+    <form onSubmit={handleFormSubmit} className="space-y-4">
       {errorMessage && <p className="text-red-600 text-center">{errorMessage}</p>}
 
       <div>
         <input
-          onChange={onInputChange}
+          onChange={handleInputChange}
           value={formData.email}
           className="rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 placeholder-gray-400 text-white"
           type="email"
@@ -52,7 +52,7 @@ export const SignInForm = () => {
 
       <div>
         <input
-          onChange={onInputChange}
+          onChange={handleInputChange}
           value={formData.password}
           className="rounded-lg block w-full p-2.5 bg-gray-700 border border-gray-600 placeholder-gray-400 text-white"
           type="password"

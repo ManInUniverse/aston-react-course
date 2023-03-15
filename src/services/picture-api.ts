@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { Picture, Pictures, PictureDTO } from '../types/picture';
+import { Picture, Pictures, PictureDTO, SearchResponse } from '../types/picture';
 
 const BASE_URL = 'https://api.unsplash.com/';
 const API_ACCESS_KEY = process.env.REACT_APP_API_ACCESS_KEY;
@@ -12,7 +12,8 @@ const RANDOM_PICTURES_COUNT = 12;
 const getPictureFromDto = ({
   id,
   alt_description,
-  location: { name, city, country },
+  description,
+  location: { name } = { name: null },
   urls: { regular, small },
   color,
   views,
@@ -21,10 +22,8 @@ const getPictureFromDto = ({
   created_at,
 }: PictureDTO): Picture => ({
   id,
-  description: alt_description,
+  description: (alt_description ?? description) as string,
   locationName: name,
-  locationCity: city,
-  locationCountry: country,
   urlRegular: regular,
   urlSmall: small,
   color,
@@ -55,7 +54,20 @@ export const pictureAPI = createApi({
       }),
       transformResponse: (responseData: PictureDTO) => getPictureFromDto(responseData),
     }),
+    searchPictures: builder.query<Pictures, { keyword: string; count: number }>({
+      query: ({ keyword, count }) => ({
+        url: 'search/photos',
+        params: {
+          query: keyword,
+          per_page: count,
+        },
+        headers: HEADERS,
+      }),
+      transformResponse: (responseData: SearchResponse) =>
+        responseData.results.map(getPictureFromDto),
+    }),
   }),
 });
 
-export const { useGetRandomPicturesQuery, useGetPictureByIdQuery } = pictureAPI;
+export const { useGetRandomPicturesQuery, useGetPictureByIdQuery, useSearchPicturesQuery } =
+  pictureAPI;
