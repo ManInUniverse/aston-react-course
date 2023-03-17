@@ -2,11 +2,15 @@ import { useGetRandomPicturesQuery } from '../../services/picture-api';
 
 import { PictureList } from '../../components/picture-list/picture-list';
 
-export const MainPage = () => {
-  const { isLoading, data: randomPictures } = useGetRandomPicturesQuery();
+const MainPage = () => {
+  const { isError, isLoading, data: randomPictures } = useGetRandomPicturesQuery();
 
   if (isLoading) {
     return <p className="text-center text-3xl my-10">Loading...</p>;
+  }
+
+  if (isError) {
+    return <p className="text-center text-3xl my-10">Failed to get data from server</p>;
   }
 
   return (
@@ -21,3 +25,5 @@ export const MainPage = () => {
     </>
   );
 };
+
+export default MainPage;

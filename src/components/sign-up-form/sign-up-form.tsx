@@ -6,9 +6,14 @@ import { SignUpData } from '../../types/user';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { signUpAction } from '../../store/user-api-actions';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { getUserProcessingStatus } from '../../store/slices/user-slice/selectors';
+
+import { Spinner } from '../spinner/spinner';
 
 export const SignUpForm = () => {
   const dispatch = useAppDispatch();
+  const isUserProcessing = useAppSelector(getUserProcessingStatus);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState<SignUpData>({
     name: '',
@@ -88,8 +93,9 @@ export const SignUpForm = () => {
       <button
         type="submit"
         className="w-1/2 text-yellow-300 hover:text-white border border-yellow-300 hover:bg-yellow-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        disabled={isUserProcessing}
       >
-        Sign up
+        {isUserProcessing ? <Spinner /> : 'Sign up'}
       </button>
 
       <p className="text-sm font-light text-gray-400">

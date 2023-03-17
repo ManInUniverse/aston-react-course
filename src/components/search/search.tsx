@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import { useSearchPicturesQuery } from '../../services/picture-api';
 import { useDebounce } from '../../hooks/useDebounce';
@@ -10,6 +9,7 @@ import { getUserData } from '../../store/slices/user-slice/selectors';
 import { addToHistoryAction } from '../../store/user-api-actions';
 
 import { SearchForm } from '../search-form/search-form';
+import { SearchResultsList } from '../search-results-list/search-results-list';
 
 const SUGGESTIONS_COUNT = 5;
 
@@ -21,7 +21,11 @@ export const Search = () => {
   const [dropdown, setDropdown] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const debouncedSearchValue = useDebounce(searchValue);
-  const { isLoading, data: results } = useSearchPicturesQuery(
+  const {
+    isError,
+    isLoading,
+    data: results,
+  } = useSearchPicturesQuery(
     {
       keyword: debouncedSearchValue,
       count: SUGGESTIONS_COUNT,
@@ -32,8 +36,8 @@ export const Search = () => {
   );
 
   useEffect(() => {
-    setDropdown(debouncedSearchValue.length >= 3 && results?.length! > 0);
-  }, [debouncedSearchValue, results]);
+    setDropdown(debouncedSearchValue.length >= 3);
+  }, [debouncedSearchValue]);
 
   useEffect(() => {
     setDropdown(false);
@@ -62,21 +66,18 @@ export const Search = () => {
       />
 
       {dropdown && (
-        <ul className="absolute inset-x-0 bg-white top-full shadow-md z-[3] overflow-hidden rounded-lg">
+        <div className="absolute inset-x-0 bg-white top-full shadow-md z-[3] overflow-hidden rounded-lg">
           {isLoading && <p className="text-center">Loading...</p>}
 
+          {isError && <p className="text-center">Failed to get data from server</p>}
+
           {results &&
-            results.map(({ id, description }) => (
-              <li key={id}>
-                <Link
-                  to={`/pictures/${id}`}
-                  className="py-2 px-4 hover:bg-slate-500 hover:text-white transition-colors block first-letter:uppercase"
-                >
-                  {description}
-                </Link>
-              </li>
+            (results.length ? (
+              <SearchResultsList results={results} />
+            ) : (
+              <p className="text-center">{"Sorry, but we didn't find anything."}</p>
             ))}
-        </ul>
+        </div>
       )}
     </div>
   );

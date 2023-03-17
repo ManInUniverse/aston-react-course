@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import { useContext } from 'react';
 
 import { useGetPictureByIdQuery } from '../../services/picture-api';
 import { formatDateTime } from '../../utils';
-import { AppRoute } from '../../const';
+import { AppRoute, Theme } from '../../const';
 import { addToFavoritesAction } from '../../store/user-api-actions';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -12,10 +13,12 @@ import { ReactComponent as LocationIcon } from '../../assets/location-icon.svg';
 import { ReactComponent as DownloadIcon } from '../../assets/download-icon.svg';
 
 import { FavoriteButton } from '../../components/favorite-button/favorite-button';
+import { ThemeContext } from '../../components/theme-provider/theme-provider';
 
-export const PicturePage = () => {
+const PicturePage = () => {
+  const { theme } = useContext(ThemeContext);
   const { id } = useParams<{ id: string }>();
-  const { isLoading, data: picture } = useGetPictureByIdQuery(id as string);
+  const { isError, isLoading, data: picture } = useGetPictureByIdQuery(id as string);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userData = useAppSelector(getUserData);
@@ -39,18 +42,26 @@ export const PicturePage = () => {
     return <p className="text-center text-3xl my-10">Loading...</p>;
   }
 
+  if (isError) {
+    return <p className="text-center text-3xl my-10">Failed to get data from server</p>;
+  }
+
   return (
     <section className="flex justify-center">
       {picture && (
         <>
-          <div className="flex flex-col rounded-md shadow-lg overflow-hidden border border-neutral-200  ">
+          <div
+            className={`${
+              theme === Theme.Dark ? 'border-transparent' : 'border-neutral-200'
+            } flex flex-col rounded-md shadow-lg overflow-hidden border`}
+          >
             <div
               className="px-5 py-2 flex items-center flex-wrap"
               style={{ backgroundColor: `${picture.color}` }}
             >
               <h1 className="sr-only">{picture.description}</h1>
 
-              <dl className="flex gap-5 mr-5 flex-wrap">
+              <dl className="flex gap-5 mr-5 flex-wrap text-black">
                 <div className="flex items-center px-3 py-2 rounded-md shadow-sm bg-neutral-100 border border-neutral-200">
                   <dt className="mr-1 whitespace-nowrap">Created at:</dt>
                   <dd className="whitespace-nowrap">
@@ -104,3 +115,5 @@ export const PicturePage = () => {
     </section>
   );
 };
+
+export default PicturePage;

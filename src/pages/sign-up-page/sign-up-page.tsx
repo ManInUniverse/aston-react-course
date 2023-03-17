@@ -9,7 +9,7 @@ import human from '../../assets/human.jpg';
 import { Logo } from '../../components/logo/logo';
 import { SignUpForm } from '../../components/sign-up-form/sign-up-form';
 
-export const SignUpPage = () => {
+const SignUpPage = () => {
   const authStatus = useAppSelector(getAuthStatus);
 
   if (authStatus === AuthStatus.Auth) {
@@ -40,3 +40,5 @@ export const SignUpPage = () => {
     </div>
   );
 };
+
+export default SignUpPage;

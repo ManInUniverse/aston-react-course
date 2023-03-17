@@ -1,46 +1,27 @@
-# Getting Started with Create React App
+![Pictorial](https://github.com/ManInUniverse/aston-react-course/blob/main/src/assets/logo-main.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
+# Проект "Pictorial"
 
-## Available Scripts
+Учебный проект в рамках React-интенсива Aston. Pictorial - это сервис для поиска, просмотра и скачивания изображений. С помощью данного приложения ты сможешь найти изображения и фотографии на любой вкус!
 
-In the project directory, you can run:
+Зарегистрируйся, и сможешь добавлять понравившиеся картинки в список избранного, а также просматривать историю поиска.
 
-### `npm start`
+## При разработке было использовано:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React.js (сборка - Create React App);
+- TypeScript;
+- Redux Toolkit (+ RTK Query);
+- React Router;
+- Day.js;
+- Tailwind CSS;
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Особенности проекта:
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Преимущественно используются функциональные компоненты;
+- Управляемые компоненты форм;
+- Применен Context API для изменения цветовой темы;
+- Используется lazy-загрузка модулей страниц приложения;
+- Есть поиск с предложенными вариантами в реальном времени;
+- Реализована авторизация с использованием localStorage;
+- Middleware: Redux Thunk, RTK Query, logger (логирование действий пользователя);
+- Присутствуют ErrorBoundaries ("предохранители").

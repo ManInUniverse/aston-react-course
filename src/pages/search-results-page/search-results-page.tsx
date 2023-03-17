@@ -6,9 +6,13 @@ import { PictureList } from '../../components/picture-list/picture-list';
 
 const SEARCH_RESULTS_COUNT = 20;
 
-export const SearchResultsPage = () => {
+const SearchResultsPage = () => {
   let [searchParams] = useSearchParams();
-  const { isLoading, data: results } = useSearchPicturesQuery({
+  const {
+    isError,
+    isLoading,
+    data: results,
+  } = useSearchPicturesQuery({
     keyword: searchParams.get('q') as string,
     count: SEARCH_RESULTS_COUNT,
   });
@@ -17,12 +21,24 @@ export const SearchResultsPage = () => {
     return <p className="text-center text-3xl my-10">Loading...</p>;
   }
 
+  if (isError) {
+    return <p className="text-center text-3xl my-10">Failed to get data from server</p>;
+  }
+
   return (
     <section>
-      <h1 className="text-center text-3xl my-6">{`Search results for "${searchParams.get(
-        'q'
-      )}"`}</h1>
-      ;{results && <PictureList pictures={results} />}
+      <h1 className="text-center text-3xl my-6">
+        {`Search results for "${searchParams.get('q')}"`}
+      </h1>
+
+      {results &&
+        (results.length ? (
+          <PictureList pictures={results} />
+        ) : (
+          <p className="text-center text-xl my-10">{"Sorry, but we didn't find anything."}</p>
+        ))}
     </section>
   );
 };
+
+export default SearchResultsPage;

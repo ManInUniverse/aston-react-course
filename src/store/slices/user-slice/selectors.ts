@@ -8,3 +8,6 @@ export const getAuthCheckedStatus = (state: RootState): boolean =>
   state[NameSpace.User].authStatus !== AuthStatus.Unknown;
 
 export const getUserData = (state: RootState): UserData | null => state[NameSpace.User].userData;
+
+export const getUserProcessingStatus = (state: RootState): boolean =>
+  state[NameSpace.User].isUserProcessing;

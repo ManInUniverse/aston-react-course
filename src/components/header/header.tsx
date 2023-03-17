@@ -6,6 +6,7 @@ import { Logo } from '../logo/logo';
 import { Search } from '../search/search';
 import { GuestNav } from '../guest-nav/guest-nav';
 import { UserNav } from '../user-nav/user-nav';
+import { ThemeControl } from '../theme-control/theme-control';
 
 export const Header = () => {
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
@@ -18,8 +19,12 @@ export const Header = () => {
           <Logo />
         </div>
 
-        <div className="mr-auto xl:w-[350px]">
+        <div className="mr-10 xl:w-[350px]">
           <Search />
+        </div>
+
+        <div className="mr-auto">
+          <ThemeControl />
         </div>
 
         {isAuthChecked && (

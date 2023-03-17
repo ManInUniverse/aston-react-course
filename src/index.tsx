@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { App } from './components/app/app';
+import { ThemeProvider } from './components/theme-provider/theme-provider';
 
 import { store } from './store/index';
 import { checkAuthAction } from './store/user-api-actions';
@@ -16,7 +17,9 @@ store.dispatch(checkAuthAction());
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );

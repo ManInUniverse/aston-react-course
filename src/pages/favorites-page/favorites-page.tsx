@@ -3,7 +3,7 @@ import { getUserData } from '../../store/slices/user-slice/selectors';
 
 import { FavoriteList } from '../../components/favorite-list/favorite-list';
 
-export const FavoritesPage = () => {
+const FavoritesPage = () => {
   const userData = useAppSelector(getUserData);
 
   return (
@@ -24,3 +24,5 @@ export const FavoritesPage = () => {
     </section>
   );
 };
+
+export default FavoritesPage;
