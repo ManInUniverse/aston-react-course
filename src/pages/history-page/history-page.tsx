@@ -7,11 +7,11 @@ import { ReactComponent as ClearIcon } from '../../assets/clear-icon.svg';
 
 import { HistoryList } from '../../components/history-list/history-list';
 
-export const HistoryPage = () => {
+const HistoryPage = () => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector(getUserData);
 
-  const onClearHistoryButtonClick = () => {
+  const handleClearButtonClick = () => {
     if (userData) {
       dispatch(clearHistoryAction({ email: userData.email }));
     }
@@ -26,7 +26,7 @@ export const HistoryPage = () => {
           {userData.history.length ? (
             <>
               <button
-                onClick={onClearHistoryButtonClick}
+                onClick={handleClearButtonClick}
                 title="Clear history"
                 className="px-3 py-1 rounded-md shadow-sm bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 mb-4 block ml-auto"
               >
@@ -45,3 +45,5 @@ export const HistoryPage = () => {
     </section>
   );
 };
+
+export default HistoryPage;

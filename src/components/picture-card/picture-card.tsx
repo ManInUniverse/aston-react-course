@@ -1,7 +1,8 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-import { AppRoute } from '../../const';
+import { AppRoute, Theme } from '../../const';
 import { Picture } from '../../types/picture';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
@@ -9,12 +10,14 @@ import { getUserData } from '../../store/slices/user-slice/selectors';
 import { addToFavoritesAction } from '../../store/user-api-actions';
 
 import { FavoriteButton } from '../favorite-button/favorite-button';
+import { ThemeContext } from '../theme-provider/theme-provider';
 
 type Props = {
   picture: Picture;
 };
 
 export const PictureCard = ({ picture }: Props) => {
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const userData = useAppSelector(getUserData);
@@ -35,7 +38,11 @@ export const PictureCard = ({ picture }: Props) => {
   };
 
   return (
-    <div className="h-[300px] w-full border border-gray-200 rounded-lg shadow-md overflow-hidden relative group">
+    <div
+      className={`${
+        theme === Theme.Dark ? 'border-transparent' : 'border-gray-200'
+      } h-[300px] w-full border rounded-lg shadow-md overflow-hidden relative group`}
+    >
       <Link
         to={`/pictures/${picture.id}`}
         className="absolute top-0 left-0 z-[1] w-full h-full opacity-50 group-hover:bg-gradient-to-t group-hover:from-black"

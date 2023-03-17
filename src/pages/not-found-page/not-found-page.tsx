@@ -1,6 +1,6 @@
 import { Logo } from '../../components/logo/logo';
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   return (
     <div className="bg-[#01012A] min-h-screen flex flex-col">
       <div className="container mx-auto p-6 flex-grow flex flex-col items-center">
@@ -13,3 +13,5 @@ export const NotFoundPage = () => {
     </div>
   );
 };
+
+export default NotFoundPage;

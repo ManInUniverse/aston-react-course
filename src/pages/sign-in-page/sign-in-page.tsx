@@ -7,7 +7,7 @@ import { getAuthStatus } from '../../store/slices/user-slice/selectors';
 import { Logo } from '../../components/logo/logo';
 import { SignInForm } from '../../components/sign-in-form/sign-in-form';
 
-export const SignInPage = () => {
+const SignInPage = () => {
   const authStatus = useAppSelector(getAuthStatus);
 
   if (authStatus === AuthStatus.Auth) {
@@ -32,3 +32,5 @@ export const SignInPage = () => {
     </div>
   );
 };
+
+export default SignInPage;

@@ -1,7 +1,7 @@
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { getUserData } from '../../store/slices/user-slice/selectors';
+import { getUserData, getUserProcessingStatus } from '../../store/slices/user-slice/selectors';
 import { signOutAction } from '../../store/user-api-actions';
 
 import { ReactComponent as FavoriteIcon } from '../../assets/favorite-icon.svg';
@@ -10,10 +10,12 @@ import { ReactComponent as SignOutIcon } from '../../assets/sign-out-icon.svg';
 
 import { UserNavItem } from '../user-nav-item/user-nav-item';
 import { UserNavLink } from '../user-nav-link/user-nav-link';
+import { Spinner } from '../spinner/spinner';
 
 export const UserNav = () => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector(getUserData);
+  const isUserProcessing = useAppSelector(getUserProcessingStatus);
 
   const favoritesCount = userData?.favorites.length;
 
@@ -51,10 +53,17 @@ export const UserNav = () => {
             onClick={() => dispatch(signOutAction())}
             className="text-[#E9E9E9] hover:text-red-600 text-xl p-2 transition block"
             title="Sign out"
+            disabled={isUserProcessing}
           >
-            <SignOutIcon width="28" height="28" stroke="currentColor" />
+            {isUserProcessing ? (
+              <Spinner />
+            ) : (
+              <>
+                <SignOutIcon width="28" height="28" stroke="currentColor" />
 
-            <span className="sr-only">Sign out</span>
+                <span className="sr-only">Sign out</span>
+              </>
+            )}
           </button>
         </UserNavItem>
       </ul>

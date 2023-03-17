@@ -6,9 +6,14 @@ import { SignInData } from '../../types/user';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { signInAction } from '../../store/user-api-actions';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { getUserProcessingStatus } from '../../store/slices/user-slice/selectors';
+
+import { Spinner } from '../spinner/spinner';
 
 export const SignInForm = () => {
   const dispatch = useAppDispatch();
+  const isUserProcessing = useAppSelector(getUserProcessingStatus);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [formData, setFormData] = useState<SignInData>({
     email: '',
@@ -69,8 +74,9 @@ export const SignInForm = () => {
       <button
         className="w-full text-white bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-5 py-2.5"
         type="submit"
+        disabled={isUserProcessing}
       >
-        Sign in
+        {isUserProcessing ? <Spinner /> : 'Sign in'}
       </button>
 
       <p className="text-sm font-light text-gray-400">

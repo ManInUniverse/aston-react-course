@@ -17,3 +17,8 @@ export enum AuthStatus {
 export enum NameSpace {
   User = 'USER',
 }
+
+export enum Theme {
+  Dark = 'dark',
+  Light = 'light',
+}
