@@ -18,8 +18,8 @@
 ## Особенности проекта:
 
 - Преимущественно используются функциональные компоненты;
-- Есть разделение на "глупые" и "умные" компоненты ([SearchForm](./src/components/search-form/search-form.tsx)/[Search](./src/components/search/search.tsx), [FavoriteList](./src/components/favorite-list/favorite-list.tsx)/[FavoritesPage](./src/pages/favorites-page/favorites-page.tsx), [Toggler](./src/components/toggler/toggler.tsx)/[ThemeControl](./src/components/theme-control/theme-control.tsx));
-- Есть рендеринг списков ([PictureList](./src/components/picture-list/picture-list.tsx), [HistoryList](./src/components/history-list/history-list.tsx));
+- Есть разделение на "глупые" и "умные" компоненты ([SearchForm](./src/components/search-form/search-form.tsx)/[Search](./src/components/search/search.tsx), [PictureList](./src/components/picture-list/picture-list.tsx)/[MainPage](./src/pages/main-page/main-page.tsx), [Toggler](./src/components/toggler/toggler.tsx)/[ThemeControl](./src/components/theme-control/theme-control.tsx));
+- Есть рендеринг списков ([FavoriteList](./src/components/favorite-list/favorite-list.tsx), [HistoryList](./src/components/history-list/history-list.tsx));
 - Применены управляемые компоненты форм ([SignInForm](./src/components/sign-in-form/sign-in-form.tsx), [SignUpForm](./src/components/sign-up-form/sign-up-form.tsx));
 - Применен Context API для изменения цветовой темы ([ThemeProvider](./src/components/theme-provider/theme-provider.tsx), [Layout](./src/components/layout/layout.tsx));
 - Присутствуют ErrorBoundaries ([ErrorBoundary](./src/components/error-boundary/error-boundary.tsx));
