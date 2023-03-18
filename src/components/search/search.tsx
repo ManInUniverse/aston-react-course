@@ -66,7 +66,7 @@ export const Search = () => {
       />
 
       {dropdown && (
-        <div className="absolute inset-x-0 bg-white top-full shadow-md z-[3] overflow-hidden rounded-lg">
+        <div className="absolute inset-x-0 bg-white top-full shadow-md overflow-hidden rounded-lg">
           {isLoading && <p className="text-center">Loading...</p>}
 
           {isError && <p className="text-center">Failed to get data from server</p>}

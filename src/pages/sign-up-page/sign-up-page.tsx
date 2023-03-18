@@ -1,5 +1,6 @@
 import { Navigate } from 'react-router-dom';
 
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 import { AppRoute, AuthStatus } from '../../const';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getAuthStatus } from '../../store/slices/user-slice/selectors';
@@ -10,6 +11,7 @@ import { Logo } from '../../components/logo/logo';
 import { SignUpForm } from '../../components/sign-up-form/sign-up-form';
 
 const SignUpPage = () => {
+  useScrollToTop();
   const authStatus = useAppSelector(getAuthStatus);
 
   if (authStatus === AuthStatus.Auth) {
